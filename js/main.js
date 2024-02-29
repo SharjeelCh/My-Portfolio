@@ -106,27 +106,25 @@ function bodyScrollingToggle() {
 
     /* filter portfolio items */
     filterContainer.addEventListener("click", (event) => {
-        if(event.target.classList.contains("filter-item") &&
-        !event.target.classList.contains("active")){
+        if (event.target.classList.contains("filter-item") && !event.target.classList.contains("active")) {
             // deactivate existing active 'filter-item' 
             filterContainer.querySelector(".active").classList.remove("outer-shadow", "active");
-            // active new `filter item'
+            // activate new `filter item'
             event.target.classList.add("active", 'outer-shadow');
-
+    
             const target = event.target.getAttribute("data-target");
-            portfolioItems.forEach((item) =>{
-                if(target === item.getAttribute("data-category") || target === 'all'){
+            portfolioItems.forEach((item) => {
+                const categories = item.getAttribute("data-category").split(" ");
+                if (categories.includes(target) || target === 'all') {
                     item.classList.remove("hide");
                     item.classList.add("show");
-                }
-                else{
+                } else {
                     item.classList.remove("show");
                     item.classList.add("hide");
                 }
-            })
+            });
         }
-    
-    })
+    });
 
     portfolioItemsContainer.addEventListener("click", (event) =>{
         if(event.target.closest(".portfolio-item-inner")){
